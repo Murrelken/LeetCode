@@ -3,6 +3,28 @@
 ##
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
+# Rider
+# Rider auto-generates .iml files, and contentModel.xml
+LeetCode/.idea
+
+Thumbs.db
+Desktop.ini
+.DS_Store
+
+# Default ignored files
+/shelf/
+/workspace.xml
+# Rider ignored files
+/projectSettingsUpdater.xml
+/modules.xml
+/.idea.LeetCode.iml
+/contentModel.xml
+# Datasource local storage ignored files
+/dataSources/
+/dataSources.local.xml
+# Editor-based HTTP Client requests
+/httpRequests/
+
 # User-specific files
 *.rsuser
 *.suo
