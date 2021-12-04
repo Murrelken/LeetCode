@@ -30,5 +30,25 @@ namespace LeetCode.Problems
 
             return maxLength;
         }
+
+        public int LengthOfLongestSubstringSecond(string s)
+        {
+            var symbols = new Dictionary<char, int>();
+            var maxLen = 0;
+            var substrStart = 0;
+            for (var i = 0; i < s.Length; i++)
+            {
+                if (symbols.ContainsKey(s[i]))
+                {
+                    var currentLen = i - substrStart;
+                    maxLen = Math.Max(currentLen, maxLen);
+                    if (symbols[s[i]] + 1 > substrStart) substrStart = symbols[s[i]] + 1;
+                    symbols[s[i]] = i;
+                }
+                else symbols.Add(s[i], i);
+            }
+
+            return Math.Max(s.Length - substrStart, maxLen);
+        }
     }
 }
