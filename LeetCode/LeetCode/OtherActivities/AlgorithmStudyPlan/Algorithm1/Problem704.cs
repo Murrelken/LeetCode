@@ -5,25 +5,34 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
         public int Search(int[] nums, int target)
         {
             var index = nums.Length / 2;
-            var remainingArrayLength = nums.Length / 2;
+            var left = 0;
+            var right = nums.Length;
+            var shouldSkipCheck = nums.Length == 2;
             while (true)
             {
                 if (nums[index] == target)
                     return index;
 
-                if (remainingArrayLength == 0)
+                if (right - left < 2 && !shouldSkipCheck)
                     return -1;
+
+                shouldSkipCheck = false;
 
                 if (nums[index] > target)
                 {
-                    index -= remainingArrayLength == 1 ? 1 : remainingArrayLength / 2;
+                    right = index;
+                    index = (right + left) / 2;
+                    if (index == right)
+                        index--;
+                    
                 }
                 else
                 {
-                    index += remainingArrayLength == 1 ? 1 : remainingArrayLength / 2;
+                    left = index;
+                    index = (right + left) / 2;
+                    if (index == left)
+                        index++;
                 }
-
-                remainingArrayLength /= 2;
             }
         }
     }
