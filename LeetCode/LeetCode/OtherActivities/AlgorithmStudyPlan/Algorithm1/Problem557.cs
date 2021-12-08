@@ -8,7 +8,7 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
     {
         public string ReverseWords(string s)
         {
-            short left, right;
+            int left, right;
             left = right = 0;
             var stringArray = s.ToArray();
 
@@ -17,7 +17,7 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
                 if (right == s.Length || s[right] == ' ')
                 {
                     Array.Reverse(stringArray, left, right - left);
-                    left = (short) (right + 1);
+                    left = right + 1;
                 }
 
                 right++;
