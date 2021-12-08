@@ -1,3 +1,5 @@
+using LeetCode.DataStructures;
+
 namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
 {
     public class Problem876
@@ -14,19 +16,6 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
             }
             
             return middle;
-        }
-    }
-
-
-    public class ListNode
-    {
-        public int val;
-        public ListNode next;
-
-        public ListNode(int val = 0, ListNode next = null)
-        {
-            this.val = val;
-            this.next = next;
         }
     }
 }
