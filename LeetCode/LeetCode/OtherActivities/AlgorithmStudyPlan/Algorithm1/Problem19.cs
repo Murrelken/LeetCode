@@ -6,23 +6,21 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
     {
         public ListNode RemoveNthFromEnd(ListNode head, int n)
         {
-            if (head.next is null)
-                return null;
-            var target = head;
-            var current = head;
+            ListNode target;
+            var current = target = head;
 
-            while (current.next is not null)
+            for (var i = 0; i < n; i++)
+            {
+                current = current?.next;
+            }
+
+            if (current == null)
+                return head.next;
+
+            while (current.next != null)
             {
                 current = current.next;
-
-                if (n == 0)
-                    target = target.next;
-                else
-                {
-                    n--;
-                    if (n == 1 && current.next == null)
-                        return head.next;
-                }
+                target = target.next;
             }
 
             target.next = target.next.next;
