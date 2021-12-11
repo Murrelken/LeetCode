@@ -19,18 +19,23 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
                     remainingItems.Add((currSr - 1, currSc));
                     hash.Add((currSr - 1, currSc));
                 }
-                if(currSr != y - 1 && image[currSr + 1][currSc] == image[currSr][currSc] && !hash.Contains((currSr + 1, currSc)))
+
+                if (currSr != y - 1 && image[currSr + 1][currSc] == image[currSr][currSc] &&
+                    !hash.Contains((currSr + 1, currSc)))
                 {
                     remainingItems.Add((currSr + 1, currSc));
                     hash.Add((currSr + 1, currSc));
                 }
-                
-                if(currSc != 0 && image[currSr][currSc - 1] == image[currSr][currSc] && !hash.Contains((currSr, currSc - 1)))
+
+                if (currSc != 0 && image[currSr][currSc - 1] == image[currSr][currSc] &&
+                    !hash.Contains((currSr, currSc - 1)))
                 {
                     remainingItems.Add((currSr, currSc - 1));
                     hash.Add((currSr, currSc - 1));
                 }
-                if(currSc != x - 1 && image[currSr][currSc + 1] == image[currSr][currSc] && !hash.Contains((currSr, currSc + 1)))
+
+                if (currSc != x - 1 && image[currSr][currSc + 1] == image[currSr][currSc] &&
+                    !hash.Contains((currSr, currSc + 1)))
                 {
                     remainingItems.Add((currSr, currSc + 1));
                     hash.Add((currSr, currSc + 1));
@@ -40,6 +45,34 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
             }
 
             return image;
+        }
+
+        public int[][] FloodFillRecursive(int[][] image, int sr, int sc, int newColor)
+        {
+            var initialColor = image[sr][sc];
+            if (initialColor != newColor)
+            {
+                int y = image.Length, x = image[0].Length;
+                RecursiveCall(image, sr, sc, initialColor, newColor, x, y);
+            }
+            return image;
+        }
+
+        private static void RecursiveCall(int[][] image, int sr, int sc, int initialColor, int newColor, int x, int y)
+        {
+            if (image[sr][sc] != initialColor) return;
+
+            image[sr][sc] = newColor;
+
+            if (sr != 0)
+                RecursiveCall(image, sr - 1, sc, initialColor, newColor, x, y);
+            if (sr != y - 1)
+                RecursiveCall(image, sr + 1, sc, initialColor, newColor, x, y);
+
+            if (sc != 0)
+                RecursiveCall(image, sr, sc - 1, initialColor, newColor, x, y);
+            if (sc != x - 1)
+                RecursiveCall(image, sr, sc + 1, initialColor, newColor, x, y);
         }
     }
 }
