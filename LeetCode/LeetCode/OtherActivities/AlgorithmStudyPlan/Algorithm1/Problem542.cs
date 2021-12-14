@@ -8,40 +8,48 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
     {
         public int[][] UpdateMatrix(int[][] mat)
         {
-            for (byte i = 0; i < mat.Length; i++)
+            var n = mat[0].Length;
+            foreach (var t in mat)
             {
-                for (byte j = 0; j < mat[i].Length; j++)
+                for (var j = 0; j < n; j++)
                 {
-                    if (mat[i][j] == 1)
+                    if (t[j] == 1)
+                        t[j] = int.MaxValue;
+                }
+            }
+
+            for (var i = 0; i < mat.Length; i++)
+            {
+                for (var j = 0; j < mat[i].Length; j++)
+                {
+                    if (mat[i][j] == 0)
                     {
-                        mat[i][j] = GetPathLength(mat, i, j);
+                        SetPathLength(mat, i, j);
                     }
-                        
                 }
             }
 
             return mat;
         }
 
-        private static int GetPathLength(int[][] mat, int initialI, int initialJ)
+        private static void SetPathLength(int[][] mat, int initialI, int initialJ)
         {
             var step = 0;
-            var alreadyVisited = new HashSet<(int i, int j)>();
 
-            var newList = new List<(int i, int j)> { (initialI, initialJ) };
+            var queue = new Queue<(int i, int j)>();
+            queue.Enqueue((initialI, initialJ));
 
-            while (newList.Count > 0)
+            while (queue.Any())
             {
                 step++;
-                var tempList = newList
-                    .Except(alreadyVisited)
-                    .ToList();
 
-                newList.Clear();
+                var currentCount = queue.Count;
 
-                foreach (var (i, j) in tempList)
+                while (currentCount > 0)
                 {
-                    alreadyVisited.Add((i, j));
+                    currentCount--;
+
+                    var (i, j) = queue.Dequeue();
 
                     for (short adjI = -1; adjI < 2; adjI++)
                     {
@@ -51,16 +59,18 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
                             if (i + adjI < 0 ||
                                 i + adjI >= mat.Length ||
                                 j + adjJ < 0 ||
-                                j + adjJ >= mat[i + adjI].Length) continue;
+                                j + adjJ >= mat[i + adjI].Length ||
+                                mat[i + adjI][j + adjJ] <= step) continue;
 
-                            if (mat[i + adjI][j + adjJ] == 0) return step;
-                            newList.Add((i + adjI, j + adjJ));
+                            var val1 = mat[i + adjI][j + adjJ];
+                            if (val1 != 0)
+                                mat[i + adjI][j + adjJ] = step;
+
+                            queue.Enqueue((i + adjI, j + adjJ));
                         }
                     }
                 }
             }
-
-            return step;
         }
     }
 }
