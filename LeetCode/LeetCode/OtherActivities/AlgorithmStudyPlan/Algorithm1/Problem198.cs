@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
@@ -8,26 +7,17 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
     {
         public int Rob(int[] nums)
         {
-            var resultCombinations = new List<int>();
+            if (nums.Length == 1)
+                return nums[0];
 
-            Helper(0, 0, resultCombinations, nums);
+            for (var i = 1; i < nums.Length; i++)
+            {
+                var minusTwo = i < 2 ? 0 : nums[i - 2];
+                var minusThree = i < 3 ? 0 : nums[i - 3];
+                nums[i] = Math.Max(nums[i] + minusTwo, nums[i] + minusThree);
+            }
 
-            return resultCombinations.Max();
-        }
-
-        private void Helper(int i, int sum, List<int> res, int[] nums)
-        {
-            if (i >= nums.Length)
-                res.Add(sum);
-            else
-                for (var j = i; j <= nums.Length - 1; j++)
-                {
-                    sum += nums[j];
-
-                    Helper(j + 2, sum, res, nums);
-
-                    sum -= nums[j];
-                }
+            return nums.Max();
         }
     }
 }
