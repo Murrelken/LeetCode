@@ -4,14 +4,14 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm2
     {
         public int[] SearchRange(int[] nums, int target)
         {
-            var result = new int[2];
+            var n = nums.Length;
 
             var left = 0;
-            var right = nums.Length - 1;
+            var right = n;
 
             while (left < right)
             {
-                var mid = (right + left) / 2;
+                var mid = left + (right - left) / 2;
 
                 if (nums[mid] >= target)
                 {
@@ -23,42 +23,30 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm2
                 }
             }
 
-            if (nums.Length > 0 && nums[left] == target)
-                result[0] = left;
-            else
+            var rangeLeft = left;
+            if (rangeLeft == n || nums[left] != target)
             {
-                result[0] = -1;
-                result[1] = -1;
-                return result;
+                return new[] { -1, -1 };
             }
 
-            left = 0;
-            right = nums.Length - 1;
+            left = rangeLeft;
+            right = n;
+
             while (left < right)
             {
-                var mid = (right + left) / 2;
+                var mid = left + (right - left) / 2;
 
-                if (nums[mid] <= target)
+                if (nums[mid] > target)
                 {
-                    if (left == mid)
-                    {
-                        if (nums[mid + 1] == target)
-                            left++;
-
-                        break;
-                    }
-
-                    left = mid;
+                    right = mid;
                 }
                 else
                 {
-                    right = mid - 1;
+                    left = mid + 1;
                 }
             }
 
-            result[1] = left;
-
-            return result;
+            return new[] { rangeLeft, left - 1 };
         }
     }
 }
