@@ -5,86 +5,25 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm2
 {
     public class Problem986
     {
-        public int[][] IntervalIntersection(int[][] firstList, int[][] secondList)
+        public int[][] IntervalIntersection(int[][] f, int[][] s)
         {
-            if (firstList.Length == 0 || secondList.Length == 0)
+            if (f.Length == 0 || s.Length == 0)
                 return Array.Empty<int[]>();
             
             int i = 0, j = 0;
             var result = new List<int[]>();
 
-            while (i < firstList.Length && j < secondList.Length)
+            while (i < f.Length && j < s.Length)
             {
-                if (firstList[i][0] < secondList[j][0])
-                {
-                    if (firstList[i][1] < secondList[j][0])
-                    {
-                        i++;
-                    }
-                    else if (firstList[i][1] == secondList[j][0])
-                    {
-                        result.Add(new[] { secondList[j][0], firstList[i][1] });
-                        i++;
-                    }
-                    else if (firstList[i][1] > secondList[j][0])
-                    {
-                        if (firstList[i][1] < secondList[j][1])
-                        {
-                            result.Add(new[] { secondList[j][0], firstList[i][1] });
-                            i++;
-                        } 
-                        else if (firstList[i][1] == secondList[j][1])
-                        {
-                            result.Add(new[] { secondList[j][0], firstList[i][1] });
-                            i++;
-                            j++;
-                        }
-                        else
-                        {
-                            result.Add(new[] { secondList[j][0], secondList[j][1] });
-                            j++;
-                        }
-                    }
-                }
-                else if(firstList[i][0] > secondList[j][0])
-                {
-                    if (firstList[i][1] < secondList[j][1])
-                    {
-                        result.Add(new[] { firstList[i][0], firstList[i][1] });
-                        i++;
-                    }
-                    else if(firstList[i][1] == secondList[j][1])
-                    {
-                        result.Add(new[] { firstList[i][0], firstList[i][1] });
-                        i++;
-                        j++;
-                    }
-                    else if(firstList[i][1] > secondList[j][1])
-                    {
-                        if (firstList[i][0] > secondList[j][1])
-                        {
-                            j++;
-                        }
-                        else if(firstList[i][0] == secondList[j][1])
-                        {
-                            result.Add(new[] { firstList[i][0], secondList[j][1] });
-                            j++;
-                        }
-                    }
-                }
+                var lo = Math.Max(f[i][0], s[j][0]);
+                var hi = Math.Min(f[i][1], s[j][1]);
+                if (lo <= hi)
+                    result.Add(new []{lo, hi});
+
+                if (f[i][1] < s[j][1])
+                    i++;
                 else
-                {
-                    if (firstList[i][1] <= secondList[j][1])
-                    {
-                        result.Add(new[] { firstList[i][0], firstList[i][1] });
-                        i++;
-                    }
-                    else
-                    {
-                        result.Add(new[] { firstList[i][0], secondList[j][1] });
-                        j++;
-                    }
-                }
+                    j++;
             }
 
             return result.ToArray();
