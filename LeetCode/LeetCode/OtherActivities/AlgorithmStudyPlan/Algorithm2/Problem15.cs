@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +10,7 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm2
         public IList<IList<int>> ThreeSum(int[] nums)
         {
             var hashResults = new HashSet<string>();
+            var sb = new StringBuilder();
 
             var n = nums.Length;
             for (var i = 0; i < n; i++)
@@ -19,7 +21,6 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm2
                     var x = 0 - (nums[i] + nums[j]);
                     if (s.Contains(x))
                     {
-                        var sb = new StringBuilder();
                         if (x <= nums[i] && x <= nums[j])
                         {
                             sb.Append(x);
@@ -73,6 +74,7 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm2
                         }
 
                         hashResults.Add(sb.ToString());
+                        sb.Clear();
                     }
                     else
                     {
