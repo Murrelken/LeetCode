@@ -7,30 +7,30 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm2
             if (k <= 1)
                 return 0;
 
-            short begin = 0, end = 0;
+            short left = 0, right = 0;
             int product = 1, count = 0;
 
             var len = nums.Length;
-            while (end < len)
+            while (right < len)
             {
-                product *= nums[end];
+                product *= nums[right];
                 if (product < k)
                 {
-                    count += end - begin + 1;
-                    end++;
+                    count += right - left + 1;
+                    right++;
                 }
                 else
                 {
                     while (product >= k)
                     {
-                        product /= nums[begin];
-                        begin++;
+                        product /= nums[left];
+                        left++;
                     }
 
-                    if (begin > end)
-                        end++;
+                    if (left > right)
+                        right++;
                     else
-                        product /= nums[end];
+                        product /= nums[right];
                 }
             }
 
