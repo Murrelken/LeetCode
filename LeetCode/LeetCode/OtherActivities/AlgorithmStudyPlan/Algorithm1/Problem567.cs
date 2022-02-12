@@ -9,19 +9,16 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
         public bool CheckInclusion(string s1, string s2)
         {
             var dic = new Dictionary<char, byte>();
-            for (var index = 0; index < s1.Length; index++)
-            {
-                if (dic.ContainsKey(s1[index]))
-                    dic[s1[index]]++;
+            foreach (var t in s1)
+                if (dic.ContainsKey(t))
+                    dic[t]++;
                 else
-                    dic.Add(s1[index], 1);
-            }
+                    dic.Add(t, 1);
 
             short begin, end;
             begin = end = 0;
 
             while (end < s2.Length)
-            {
                 if (dic.ContainsKey(s2[end]))
                 {
                     if (dic[s2[end]] == 1)
@@ -29,10 +26,10 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
                     else
                         dic[s2[end]]--;
 
-                    end++;
-
                     if (dic.Count == 0)
                         return true;
+
+                    end++;
                 }
                 else
                 {
@@ -44,18 +41,14 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
                     else
                     {
                         if (dic.ContainsKey(s2[begin]))
-                        {
                             dic[s2[begin]]++;
-                        }
                         else
-                        {
                             dic.Add(s2[begin], 1);
-                        }
 
                         begin++;
                     }
                 }
-            }
+
 
             return false;
         }
