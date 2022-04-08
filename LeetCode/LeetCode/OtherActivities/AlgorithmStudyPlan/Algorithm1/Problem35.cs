@@ -4,6 +4,9 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
     {
         public int SearchInsert(int[] nums, int target)
         {
+            if (nums.Length == 0)
+                return 0;
+            
             int left = 0, index;
             var right = nums.Length - 1;
             while (true)
