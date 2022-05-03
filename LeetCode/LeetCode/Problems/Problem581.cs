@@ -1,47 +1,44 @@
+using System;
+
 namespace LeetCode.Problems
 {
     public class Problem581
     {
         public int FindUnsortedSubarray(int[] nums)
         {
-            if (nums.Length <= 1)
-                return 0;
-            int leftIndex = -1, rightIndex = -1;
-
-            for (var i = 0; i < nums.Length; i++)
+            int min = int.MaxValue, max = int.MinValue;
+            var flag = false;
+            for (var i = 1; i < nums.Length; i++)
             {
-                for (var j = nums.Length - 1; j > i; j--)
-                {
-                    if (nums[j] < nums[i])
-                    {
-                        leftIndex = i;
-                        break;
-                    }
-                }
+                if (nums[i] < nums[i - 1])
+                    flag = true;
+                if (flag)
+                    min = Math.Min(min, nums[i]);
+            }
 
-                if (leftIndex != -1)
+            flag = false;
+            for (var i = nums.Length - 2; i >= 0; i--)
+            {
+                if (nums[i] > nums[i + 1])
+                    flag = true;
+                if (flag)
+                    max = Math.Max(max, nums[i]);
+            }
+
+            int l, r;
+            for (l = 0; l < nums.Length; l++)
+            {
+                if (min < nums[l])
                     break;
             }
 
-            if (leftIndex == -1)
-                return 0;
-
-            for (var i = nums.Length - 1; i >= 0; i--)
+            for (r = nums.Length - 1; r >= 0; r--)
             {
-                for (var j = 0; j < i; j++)
-                {
-                    if (nums[j] > nums[i])
-                    {
-                        rightIndex = i;
-                        break;
-                    }
-                }
-
-                if (rightIndex != -1)
+                if (max > nums[r])
                     break;
             }
 
-            return rightIndex - leftIndex + 1;
+            return r - l < 0 ? 0 : r - l + 1;
         }
     }
 }
