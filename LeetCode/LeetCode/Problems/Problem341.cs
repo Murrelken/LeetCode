@@ -1,5 +1,4 @@
 using System.Collections.Generic;
-using System.Linq;
 using LeetCode.DataStructures;
 
 namespace LeetCode.Problems
@@ -8,44 +7,31 @@ namespace LeetCode.Problems
     {
         public class NestedIterator
         {
-            private IEnumerator<NestedInteger> _iterator;
-            private readonly Stack<IEnumerator<NestedInteger>> _previousEnumerators;
-            private bool _hasNext;
+            private Queue<int> q = new Queue<int>();
 
             public NestedIterator(IList<NestedInteger> nestedList)
             {
-                _iterator = nestedList.GetEnumerator();
-                _hasNext = _iterator.MoveNext();
-                _previousEnumerators = new Stack<IEnumerator<NestedInteger>>();
+                foreach (var item in nestedList)
+                    DFS(item);
             }
 
-            public bool HasNext() => _hasNext;
+            public bool HasNext()
+            {
+                return q.Count != 0;
+            }
 
             public int Next()
             {
-                var current = _iterator.Current;
-                return current.IsInteger() ? DoIfInteger(current) : DoIfList(current);
+                return q.Count == 0 ? 0 : q.Dequeue();
             }
 
-            private int DoIfInteger(NestedInteger current)
+            private void DFS(NestedInteger cur)
             {
-                _hasNext = _iterator.MoveNext();
-                while (!_hasNext && _previousEnumerators.Any())
-                {
-                    _iterator = _previousEnumerators.Pop();
-                    _hasNext = _iterator.MoveNext();
-                }
-
-                return current.GetInteger();
-            }
-
-            private int DoIfList(NestedInteger current)
-            {
-                _previousEnumerators.Push(_iterator);
-                _iterator = current.GetList().GetEnumerator();
-                _iterator.MoveNext();
-                current = _iterator.Current;
-                return current.IsInteger() ? DoIfInteger(current) : DoIfList(current);
+                if (cur.IsInteger())
+                    q.Enqueue(cur.GetInteger());
+                else
+                    foreach (var item in cur.GetList())
+                        DFS(item);
             }
         }
     }
