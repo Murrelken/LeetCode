@@ -8,29 +8,27 @@ namespace LeetCode.Problems
     {
         public int DeepestLeavesSum(TreeNode root)
         {
-            var result = new List<int>();
+            var result = -1;
 
             var queue = new Queue<TreeNode>();
             queue.Enqueue(root);
             while (queue.Any())
             {
+                result = 0;
                 var count = queue.Count;
-                var sum = 0;
                 while (count > 0)
                 {
                     count--;
                     var deq = queue.Dequeue();
-                    sum += deq.val;
+                    result += deq.val;
                     if (deq.left != null)
                         queue.Enqueue(deq.left);
                     if (deq.right != null)
                         queue.Enqueue(deq.right);
                 }
-
-                result.Add(sum);
             }
 
-            return result.Last();
+            return result;
         }
     }
 }
