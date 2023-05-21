@@ -53,5 +53,56 @@ namespace LeetCode.Problems
 
             return preBegin.next;
         }
+
+        private static ListNode PossiblyBetterSwapNodes(ListNode head, int k)
+        {
+            var toReturn = new ListNode(0, head);
+            
+            var preFirstNodeToReplace = toReturn;
+            for (var i = 0; i < k - 1; i++)
+            {
+                preFirstNodeToReplace = preFirstNodeToReplace.next;
+            }
+
+            var preSecondNodeToReplace = toReturn;
+            var shiftedNode = toReturn;
+            for (var i = 0; i < k - 1; i++)
+            {
+                shiftedNode = shiftedNode.next;
+            }
+
+            while (shiftedNode.next.next is not null)
+            {
+                preSecondNodeToReplace = preSecondNodeToReplace.next;
+                shiftedNode = shiftedNode.next;
+            }
+
+            if (preSecondNodeToReplace.next == preFirstNodeToReplace)
+            {
+                (preSecondNodeToReplace, preFirstNodeToReplace) = (preFirstNodeToReplace, preSecondNodeToReplace);
+            }
+            
+            if (preFirstNodeToReplace.next == preSecondNodeToReplace)
+            {
+                var tempSecond = preSecondNodeToReplace.next;
+                
+                preFirstNodeToReplace.next.next = preSecondNodeToReplace.next.next;
+                tempSecond.next = preFirstNodeToReplace.next;
+                preFirstNodeToReplace.next = tempSecond;
+            }
+            else
+            {
+                var tempFirstToReplace = preFirstNodeToReplace.next;
+                var tempAfterSecondToReplace = preSecondNodeToReplace.next.next;
+            
+                preSecondNodeToReplace.next.next = preFirstNodeToReplace.next.next;
+                preFirstNodeToReplace.next = preSecondNodeToReplace.next;
+
+                tempFirstToReplace.next = tempAfterSecondToReplace;
+                preSecondNodeToReplace.next = tempFirstToReplace;
+            }
+
+            return toReturn.next;
+        }
     }
 }
