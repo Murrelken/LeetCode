@@ -29,4 +29,40 @@ namespace LeetCode.Problems
             }
         }
     }
+
+    public class KthLargestSlower
+    {
+        private readonly int?[] _kLargestValues;
+        private readonly int _k;
+
+        public KthLargestSlower(int k, int[] nums)
+        {
+            _k = k;
+            _kLargestValues = new int?[k];
+
+            for (var i = 0; i < nums.Length; i++)
+            {
+                var numberToAssign = nums[i];
+                AddElementToSortedArray(numberToAssign);
+            }
+        }
+
+        public int Add(int val)
+        {
+            AddElementToSortedArray(val);
+            return _kLargestValues.First(x => x is not null).Value;
+        }
+
+        private void AddElementToSortedArray(int numberToAssign)
+        {
+            int? tempNumberToAssign = numberToAssign;
+            for (var j = _k - 1; j >= 0; j--)
+            {
+                if (tempNumberToAssign <= _kLargestValues[j] && _kLargestValues[j] is not null)
+                    continue;
+
+                (tempNumberToAssign, _kLargestValues[j]) = (_kLargestValues[j], tempNumberToAssign);
+            }
+        }
+    }
 }
