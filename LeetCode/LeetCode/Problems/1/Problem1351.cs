@@ -2,7 +2,8 @@ namespace LeetCode.Problems;
 
 public class Problem1351
 {
-    public int CountNegatives(int[][] grid) {
+    public int CountNegatives(int[][] grid)
+    {
         var res=0;
         var height=grid.Length;
         var width=grid[0].Length;
