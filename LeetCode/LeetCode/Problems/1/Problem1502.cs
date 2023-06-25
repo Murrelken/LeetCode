@@ -1,4 +1,6 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LeetCode.Problems;
 
@@ -6,14 +8,27 @@ public class Problem1502
 {
     public bool CanMakeArithmeticProgression(int[] arr)
     {
-        Array.Sort(arr);
-        var v = arr[1] - arr[0];
-        for (var i = 2; i < arr.Length; i++)
+        int max = arr.Max(), min = arr.Min();
+        var arrLength = arr.Length;
+        
+        if (max == min)
+            return true;
+        
+        if ((max - min) % (arrLength - 1) != 0)
+            return false;
+        
+        var step = (max - min) / (arrLength - 1);
+        var steps = new bool[arrLength];
+
+        for (var i = 0; i < arrLength; i++)
         {
-            if (arr[i] - arr[i - 1] != v)
+            var temp = arr[i] - min;
+            if (temp % step != 0)
                 return false;
+
+            steps[temp / step] = true;
         }
 
-        return true;
+        return steps.All(x => x);
     }
 }
