@@ -33,9 +33,6 @@ public class Problem2462
             var value = sorted[0];
             var previousIndex = indexesByValue[sorted[0]][0];
             indexesByValue[value].RemoveAt(0);
-                
-            if (indexesByValue[value].Count == 0)
-                indexesByValue.Remove(value);
 
             sorted.RemoveAt(0);
 
