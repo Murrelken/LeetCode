@@ -9,7 +9,7 @@ public class Problem802
     public IList<int> EventualSafeNodes(int[][] graph)
     {
         var memo = new bool?[graph.Length];
-        var visited = new HashSet<int>();
+        var visited = new bool?[graph.Length];
         for (var i = 0; i < graph.Length; i++)
             Req(graph, memo, visited, i);
 
@@ -22,15 +22,15 @@ public class Problem802
         return result;
     }
 
-    private static bool? Req(int[][] graph, bool?[] memo, HashSet<int> visited, int i)
+    private static bool? Req(int[][] graph, bool?[] memo, bool?[] visited, int i)
     {
         if (memo[i] != null)
             return memo[i].Value;
 
-        if (visited.Contains(i))
+        if (visited[i].HasValue && visited[i].Value)
             return memo[i] = false;
 
-        visited.Add(i);
+        visited[i] = true;
 
         if (!graph[i].Any())
             return memo[i] = true;
