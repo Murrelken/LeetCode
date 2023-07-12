@@ -9,8 +9,9 @@ public class Problem802
     public IList<int> EventualSafeNodes(int[][] graph)
     {
         var memo = new bool?[graph.Length];
+        var visited = new HashSet<int>();
         for (var i = 0; i < graph.Length; i++)
-            Req(graph, memo, new HashSet<int>(), i);
+            Req(graph, memo, visited, i);
 
         var result = new List<int>();
 
