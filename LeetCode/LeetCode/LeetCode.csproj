@@ -5,4 +5,14 @@
         <TargetFramework>net7.0</TargetFramework>
     </PropertyGroup>
 
+    <ItemGroup>
+      <Compile Update="Problems\5\Problem50_OptimizationApproach.cs">
+        <DependentUpon>Problem50.cs</DependentUpon>
+      </Compile>
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="TestClasses\" />
+    </ItemGroup>
+
 </Project>
