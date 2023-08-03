@@ -32,7 +32,7 @@ fn calc_dp(i: i32, j: i32, dp: &mut HashMap<i32, HashMap<i32, f64>>) -> f64 {
         }
     }
 
-    let mut res = (
+    let res = (
         calc_dp(i - 4, j, dp) +
             calc_dp(i - 3, j - 1, dp) +
             calc_dp(i - 2, j - 2, dp) +

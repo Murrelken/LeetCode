@@ -8,9 +8,9 @@ fn req(n: i32, k: usize, i: i32, l: &mut Vec<i32>, res: &mut Vec<Vec<i32>>) {
     if l.len() == k {
         res.push(l.clone())
     } else {
-        for newItem in i..n + 1 {
-            l.push(newItem);
-            req(n, k, newItem + 1, l, res);
+        for new_item in i..n + 1 {
+            l.push(new_item);
+            req(n, k, new_item + 1, l, res);
             l.pop();
         }
     }
