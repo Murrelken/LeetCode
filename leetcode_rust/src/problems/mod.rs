@@ -8,3 +8,4 @@ pub mod problem_139;
 pub mod problem_74;
 pub mod problem_33;
 pub mod problem_2616;
+pub mod problem_81;
