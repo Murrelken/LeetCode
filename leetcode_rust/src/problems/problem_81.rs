@@ -1,10 +1,7 @@
 pub fn search(nums: Vec<i32>, target: i32) -> bool {
     let n = nums.len();
 
-    let shift = match nums.iter().zip(nums.iter().skip(1)).enumerate().find(|(i, (l, r))| l > r) {
-        Some(x) => { x.0 + 1 },
-        None => {n}
-    };
+    let shift = super::helpers::get_shift_of_rotated_vector(n, &nums);
 
     let mut left = 0usize;
     let mut right = n - 1;
