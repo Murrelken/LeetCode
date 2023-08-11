@@ -1,6 +1,6 @@
-pub fn get_shift_of_rotated_vector<T>(n: usize, nums: &Vec<T>) -> usize {
-    match nums.iter().zip(nums.iter().skip(1)).find(|(l, r)| l > r) {
-        Some((x, ..)) => { x.0 + 1 },
-        None => {n}
+pub fn get_shift_of_rotated_vector<T: PartialOrd>(n: usize, nums: &Vec<T>) -> usize {
+    match nums.iter().zip(nums.iter().skip(1)).enumerate().find(|(i, (l, r))| l > r) {
+        Some((x, ..)) => { x + 1 }
+        None => { n }
     }
 }
