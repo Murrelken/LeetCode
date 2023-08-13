@@ -1,3 +1,4 @@
+mod helpers;
 pub mod problem_2142;
 pub mod problem_486;
 pub mod problem_808;
@@ -10,4 +11,4 @@ pub mod problem_33;
 pub mod problem_2616;
 pub mod problem_81;
 pub mod problem_518;
-mod helpers;
+pub mod problem_63;
