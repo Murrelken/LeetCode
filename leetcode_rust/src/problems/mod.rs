@@ -1,3 +1,4 @@
+pub (self) use super::structures::list_node;
 mod helpers;
 pub mod problem_2142;
 pub mod problem_486;
@@ -14,3 +15,4 @@ pub mod problem_518;
 pub mod problem_63;
 pub mod problem_2369;
 pub mod problem_215;
+pub mod problem_86;
