@@ -3,7 +3,7 @@ use std::collections::hash_map::Entry::Occupied;
 
 pub fn maximal_network_rank(n: i32, roads: Vec<Vec<i32>>) -> i32 {
     let n = n as usize;
-    let mut weights: Vec<_> = (0..n).map(|i| (0, i as i32)).collect(); //vec!(0; n as usize);
+    let mut weights: Vec<_> = (0..n).map(|i| (0, i as i32)).collect();
     let mut paths = HashMap::new();
 
     for x in roads {
@@ -57,4 +57,32 @@ pub fn maximal_network_rank(n: i32, roads: Vec<Vec<i32>>) -> i32 {
 
         weights[n - 1].0 + weights[n - 2].0 - 1
     }
+}
+
+/// Brute force version of the function above.
+pub fn maximal_network_rank_brute(n: i32, roads: Vec<Vec<i32>>) -> i32 {
+    let n = n as usize;
+    let mut max = 0;
+    let mut paths = HashMap::new();
+
+    for x in roads {
+        paths.entry(x[0]).or_insert(HashSet::new()).insert(x[1]);
+        paths.entry(x[1]).or_insert(HashSet::new()).insert(x[0]);
+    }
+
+    for i in 0..n {
+        for j in i + 1..n {
+            let current_rank = paths.entry(i as i32).or_default().len() +
+                paths.entry(j as i32).or_default().len();
+            let mut current_rank = current_rank as i32;
+
+            if paths.entry(i as i32).or_default().contains(&(j as i32)) {
+                current_rank -= 1;
+            }
+
+            max = i32::max(current_rank, max);
+        }
+    }
+
+    max
 }
