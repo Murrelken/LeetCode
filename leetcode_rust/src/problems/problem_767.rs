@@ -36,29 +36,26 @@ pub fn reorganize_string(s: String) -> String {
         heap.push(CharWithWeight { weight: dic[k], val: *k });
     }
 
-    let mut heap_ref = &mut heap as *mut BinaryHeap<CharWithWeight>;
-    unsafe {
-        while let Some(mut x) = (&mut *heap_ref).pop() {
-            if x.weight == 0 {
-                break;
-            }
-            if !result.is_empty() && &x.val == result.last().unwrap() {
-                if let Some(mut x) = (&mut *heap_ref).peek_mut() {
-                    if x.weight == 0 {
-                        break;
-                    }
-                    result.push(x.val);
-                    x.weight += 1;
-                } else {
+    while let Some(mut x) = heap.pop() {
+        if x.weight == 0 {
+            break;
+        }
+        if !result.is_empty() && &x.val == result.last().unwrap() {
+            if let Some(mut x) = heap.peek_mut() {
+                if x.weight == 0 {
                     break;
                 }
-            } else {
                 result.push(x.val);
                 x.weight += 1;
+            } else {
+                break;
             }
-
-            (&mut *heap_ref).push(x);
+        } else {
+            result.push(x.val);
+            x.weight += 1;
         }
+
+        heap.push(x);
     }
 
     if result.len() < s.len() {
@@ -93,7 +90,7 @@ pub fn reorganize_string_v2(s: String) -> String {
         }
 
         result.push(index_to_char(i));
-        vec[i] -=1;
+        vec[i] -= 1;
     }
 
     if result.len() < s.len() {
