@@ -9,6 +9,13 @@ struct MyStack {
 /**
  * `&self` means the method takes an immutable reference
  * If you need a mutable reference, change it to `&mut self` instead.
+ *
+ * Your MyStack object will be instantiated and called as such:
+ * let obj = MyStack::new();
+ * obj.push(x);
+ * let ret_2: i32 = obj.pop();
+ * let ret_3: i32 = obj.top();
+ * let ret_4: bool = obj.empty();
  */
 impl MyStack {
     fn new() -> Self {
@@ -50,12 +57,3 @@ impl MyStack {
         self.base_queue.is_empty()
     }
 }
-
-/**
- * Your MyStack object will be instantiated and called as such:
- * let obj = MyStack::new();
- * obj.push(x);
- * let ret_2: i32 = obj.pop();
- * let ret_3: i32 = obj.top();
- * let ret_4: bool = obj.empty();
- */
