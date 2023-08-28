@@ -18,7 +18,7 @@ pub fn is_interleave(s1: String, s2: String, s3: String) -> bool {
     req(0, 0, 0, &s1, &s2, &s3, &mut dp)
 }
 
-fn req(mut res_i: usize, mut l: usize, mut r: usize, s1: &Vec<char>, s2: &Vec<char>, s3: &Vec<char>, dp: &mut HashMap<(usize, usize), bool>) -> bool {
+fn req(res_i: usize, l: usize, r: usize, s1: &Vec<char>, s2: &Vec<char>, s3: &Vec<char>, dp: &mut HashMap<(usize, usize), bool>) -> bool {
     if res_i == s3.len() {
         return true;
     }
