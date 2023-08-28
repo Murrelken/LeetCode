@@ -81,7 +81,7 @@ pub fn reorganize_string_v2(s: String) -> String {
         let (i, w) = vec
             .iter()
             .enumerate()
-            .filter(|(i, w)| result.is_empty() || result.last().unwrap() != &index_to_char(*i))
+            .filter(|(i, _)| result.is_empty() || result.last().unwrap() != &index_to_char(*i))
             .max_by(|(_, w), (_, w2)| w.cmp(w2))
             .unwrap();
 
