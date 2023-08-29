@@ -74,7 +74,6 @@ pub fn reorganize_string_v2(s: String) -> String {
         vec[char_to_index(c)] += 1;
     }
 
-
     let mut result: Vec<char> = Vec::new();
 
     loop {
