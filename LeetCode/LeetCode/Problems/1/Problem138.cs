@@ -10,7 +10,7 @@ public class Problem138
         var pre_head_result = new RandomNode(0);
 
         var new_list = new List<RandomNode>();
-        
+
         var pre_head_result_temp = pre_head_result;
         var temp_head = head;
         while (temp_head != null)
@@ -20,7 +20,7 @@ public class Problem138
             new_list.Add(pre_head_result_temp);
             temp_head = temp_head.next;
         }
-        
+
         var i = 0;
         temp_head = head;
         while (temp_head != null)
@@ -36,7 +36,7 @@ public class Problem138
             {
                 new_list[temp_head.val].random = new_list[temp_head.random.val];
             }
-            
+
             temp_head = temp_head.next;
         }
 
