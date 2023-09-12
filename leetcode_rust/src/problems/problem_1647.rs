@@ -15,6 +15,8 @@ pub fn min_deletions(s: String) -> i32 {
         max = max.max(*x);
     }
 
+    println!("{:?}", count_by_char);
+    println!("{:?}", count_by_count);
     let mut temp_max = max;
     println!("{:?}", max);
     loop {
@@ -31,16 +33,19 @@ pub fn min_deletions(s: String) -> i32 {
         if !count_by_count.contains_key(&i) {
             continue;
         }
-        let x = count_by_count.entry(i).or_default();
-        while *x > 1 {
-            res += *x - max;
+        loop {
+            let x = count_by_count.entry(i).or_default();
+            if *x <= 1 {
+                break;
+            }
+            *x -= 1;
+            res += i - temp_max;
             loop {
                 if temp_max == 0 || !count_by_count.contains_key(&temp_max) {
                     break;
                 }
                 temp_max -= 1;
             }
-            *x -= 1;
         }
     }
 
