@@ -15,37 +15,26 @@ pub fn min_deletions(s: String) -> i32 {
         max = max.max(*x);
     }
 
-    println!("{:?}", count_by_char);
-    println!("{:?}", count_by_count);
-    let mut temp_max = max;
-    println!("{:?}", max);
-    loop {
-        if temp_max == 0 || !count_by_count.contains_key(&temp_max) {
-            break;
-        }
-        temp_max -= 1;
-    }
-
     let mut res = 0;
 
     for i in (1..max + 1).rev() {
-        println!("{:?}", i);
         if !count_by_count.contains_key(&i) {
             continue;
         }
         loop {
+            loop {
+                if (max == 0 || !count_by_count.contains_key(&max)) && max < i {
+                    break;
+                }
+                max -= 1;
+            }
             let x = count_by_count.entry(i).or_default();
             if *x <= 1 {
                 break;
             }
             *x -= 1;
-            res += i - temp_max;
-            loop {
-                if temp_max == 0 || !count_by_count.contains_key(&temp_max) {
-                    break;
-                }
-                temp_max -= 1;
-            }
+            res += i - max;
+            count_by_count.insert(max, 1);
         }
     }
 
