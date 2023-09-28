@@ -23,3 +23,21 @@ pub fn sort_array_by_parity(mut nums: Vec<i32>) -> Vec<i32> {
 
     nums
 }
+
+pub fn sort_array_by_parity_v2(mut nums: Vec<i32>) -> Vec<i32> {
+    let mut right = nums.len() - 1;
+    let mut left = 0;
+
+    while left < right {
+        if nums[left] % 2 == 1 {
+            let temp = nums[left];
+            nums[left] = nums[right];
+            nums[right] = temp;
+            right -= 1;
+        } else {
+            left += 1;
+        }
+    }
+
+    nums
+}
