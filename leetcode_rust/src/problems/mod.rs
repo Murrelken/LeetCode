@@ -53,6 +53,7 @@ pub mod problem_808;
 pub mod problem_81;
 pub mod problem_86;
 pub mod problem_880;
+pub mod problem_896;
 pub mod problem_9;
 pub mod problem_905;
 pub mod problem_920;
