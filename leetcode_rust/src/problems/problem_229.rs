@@ -58,3 +58,52 @@ pub fn majority_element_v2(nums: Vec<i32>) -> Vec<i32> {
 
     res
 }
+
+pub fn majority_element_v3(nums: Vec<i32>) -> Vec<i32> {
+    let mut first_num = i32::MIN;
+    let mut second_num = i32::MIN;
+    let mut first_count = 0;
+    let mut second_count = 0;
+
+    for num in nums.iter() {
+        if num == &first_num {
+            first_count += 1;
+        } else if num == &second_num {
+            second_count += 1;
+        } else if first_count == 0 {
+            first_num = *num;
+            first_count = 1;
+        } else if second_count == 0 {
+            second_num = *num;
+            second_count = 1;
+        } else {
+            first_count -= 1;
+            second_count -= 1;
+        }
+    }
+
+    first_count = 0;
+    second_count = 0;
+
+    let third = nums.len() / 3;
+
+    for x in nums {
+        if x == first_num {
+            first_count += 1;
+        }
+        if x == second_num {
+            second_count += 1;
+        }
+    }
+
+    let mut res = Vec::new();
+
+    if first_count > third {
+        res.push(first_num);
+    }
+    if second_count > third {
+        res.push(second_num);
+    }
+
+    res
+}
