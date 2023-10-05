@@ -21,3 +21,40 @@ pub fn majority_element(nums: Vec<i32>) -> Vec<i32> {
 
     res
 }
+
+pub fn majority_element_v2(nums: Vec<i32>) -> Vec<i32> {
+    let mut frequency: HashMap<i32, i32> = HashMap::new();
+
+    for x in nums.iter() {
+        *frequency.entry(*x).or_default() += 1;
+    }
+
+    let mut max = i32::MIN;
+    let mut max_value = i32::MIN;
+    let mut second_max = i32::MIN;
+    let mut second_max_value = i32::MIN;
+
+    for x in frequency {
+        if x.1 > max {
+            second_max = max;
+            second_max_value = max_value;
+            max = x.1;
+            max_value = x.0;
+        } else if x.1 > second_max {
+            second_max = x.1;
+            second_max_value = x.0;
+        }
+    }
+
+    let mut res = Vec::new();
+    let third = (nums.len() / 3) as i32;
+
+    if max > third {
+        res.push(max_value);
+    }
+    if second_max > third {
+        res.push(second_max_value);
+    }
+
+    res
+}
