@@ -33,6 +33,7 @@ pub mod problem_287;
 pub mod problem_316;
 pub mod problem_33;
 pub mod problem_338;
+pub mod problem_343;
 pub mod problem_377;
 pub mod problem_389;
 pub mod problem_392;
