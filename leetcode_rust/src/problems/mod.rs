@@ -1,5 +1,6 @@
 pub(self) use super::structures::list_node;
 mod helpers;
+pub mod problem_1095;
 pub mod problem_118;
 pub mod problem_1203;
 pub mod problem_1282;
