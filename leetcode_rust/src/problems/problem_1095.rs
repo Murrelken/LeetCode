@@ -46,13 +46,13 @@ pub fn find_in_mountain_array(target: i32, mountain_arr: &MountainArray) -> i32 
     return -1;
 }
 
-struct MountainArray;
+pub struct MountainArray;
 
 impl MountainArray {
-    fn get(_: i32) -> i32 {
+    fn get(&self, _: i32) -> i32 {
         0
     }
-    fn length() -> i32 {
+    pub fn length(&self) -> i32 {
         0
     }
 }
