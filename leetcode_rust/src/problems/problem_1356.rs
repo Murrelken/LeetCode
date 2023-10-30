@@ -27,3 +27,24 @@ pub fn sort_by_bits(arr: Vec<i32>) -> Vec<i32> {
 
     arr.iter().map(|(x, _)| *x).collect()
 }
+
+pub fn sort_by_bits_v2(arr: Vec<i32>) -> Vec<i32> {
+    let mut arr: Vec<_> = arr
+        .iter()
+        .map(|x| {
+            let mut y = *x;
+            let mut count = 0;
+            while y > 0 {
+                if y >> 1 << 1 != y {
+                    count += 1;
+                }
+                y >>= 1;
+            }
+            return (count, *x);
+        })
+        .collect();
+
+    arr.sort();
+
+    arr.iter().map(|(_, x)| *x).collect()
+}
