@@ -48,3 +48,8 @@ pub fn sort_by_bits_v2(arr: Vec<i32>) -> Vec<i32> {
 
     arr.iter().map(|(_, x)| *x).collect()
 }
+
+pub fn sort_by_bits_v3(mut arr: Vec<i32>) -> Vec<i32> {
+    arr.sort_by_key(|&x| (x.count_ones(), x));
+    arr
+}
