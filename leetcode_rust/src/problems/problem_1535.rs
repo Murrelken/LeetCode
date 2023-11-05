@@ -3,7 +3,7 @@ pub fn get_winner(arr: Vec<i32>, k: i32) -> i32 {
         return arr[0].max(arr[1]);
     }
     if k as usize >= arr.len() {
-        return *arr.iter().max().unwrap();
+        return arr.into_iter().max().unwrap();
     }
 
     let mut current_winner = arr[0];
