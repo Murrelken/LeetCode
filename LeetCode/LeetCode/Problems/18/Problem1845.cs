@@ -6,19 +6,19 @@ public class Problem1845
     public class SeatManager
     {
         private int _last = 0;
-        private readonly SortedSet<int> _sortedSeats = new SortedSet<int>();
+        private readonly SortedSet<int> _freeSeats = new SortedSet<int>();
         public SeatManager(int n)
         {
         }
 
         public int Reserve()
         {
-            if (!_sortedSeats.Any())
+            if (!_freeSeats.Any())
                 return ++_last;
             else
             {
-                var num = _sortedSeats.Min;
-                _sortedSeats.Remove(num);
+                var num = _freeSeats.Min;
+                _freeSeats.Remove(num);
                 return num;
             }
         }
@@ -28,7 +28,7 @@ public class Problem1845
             if (seatNumber == _last)
                 _last--;
             else
-                _sortedSeats.Add(seatNumber);
+                _freeSeats.Add(seatNumber);
         }
     }
 }
