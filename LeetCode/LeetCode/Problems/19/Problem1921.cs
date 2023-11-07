@@ -16,18 +16,14 @@ public class Problem1921
 
         Array.Sort(minutesToReach);
 
-        var currentMinute = 0;
-        var result = 0;
+        var n = minutesToReach.Length;
 
-        foreach (var minute in minutesToReach)
+        for (int i = 0; i < n; i++)
         {
-            if (currentMinute >= minute)
-                break;
-
-            result++;
-            currentMinute++;
+            if (i >= minutesToReach[i])
+                return i;
         }
 
-        return result;
+        return n;
     }
 }
