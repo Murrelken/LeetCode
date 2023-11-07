@@ -1,28 +1,19 @@
 using System;
-using System.Linq;
 
 public class Problem1921
 {
     public int EliminateMaximum(int[] dist, int[] speed)
     {
-        var minutesToReach = dist.Zip(speed)
-            .Select(x =>
-            {
-                var dist = x.First;
-                var speed = x.Second;
-                return dist / speed + (dist % speed > 0 ? 1 : 0);
-            })
-            .ToArray();
-
-        Array.Sort(minutesToReach);
-
-        var n = minutesToReach.Length;
+        var n = dist.Length;
 
         for (int i = 0; i < n; i++)
-        {
-            if (i >= minutesToReach[i])
+            dist[i] = dist[i] / speed[i] + (dist[i] % speed[i] > 0 ? 1 : 0);
+
+        Array.Sort(dist);
+
+        for (int i = 0; i < n; i++)
+            if (i >= dist[i])
                 return i;
-        }
 
         return n;
     }
