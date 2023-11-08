@@ -1,3 +1,5 @@
+using System;
+
 public class Problem55
 {
     public bool CanJump(int[] nums)
@@ -12,5 +14,17 @@ public class Problem55
                 else
                     consecutiveZeros++;
         return consecutiveZeros == 0;
+    }
+
+    public bool CanJumpV2(int[] nums)
+    {
+        var reachable = 0;
+        for (var i = 0; i < nums.Length; i++)
+        {
+            if (i > reachable)
+                return false;
+            reachable = Math.Max(reachable, i + nums[i]);
+        }
+        return true;
     }
 }
