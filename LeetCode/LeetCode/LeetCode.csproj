@@ -12,6 +12,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Folder Include="Problems\28\" />
       <Folder Include="TestClasses\" />
     </ItemGroup>
 
