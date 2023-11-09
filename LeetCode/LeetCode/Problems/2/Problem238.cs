@@ -65,15 +65,13 @@ namespace LeetCode.Problems
                 if (nums[i] == 0)
                     if (zeroMet)
                     {
-                        result[firstZeroIndex] = 0;
+                        prod = 0;
                         break;
                     }
                     else
                     {
                         zeroMet = true;
                         firstZeroIndex = i;
-                        result[i] = nums[i];
-                        prod = 0;
                     }
                 else
                     prod *= nums[i];
@@ -81,6 +79,12 @@ namespace LeetCode.Problems
 
             if (prod == 0)
                 return result;
+
+            if (zeroMet)
+            {
+                result[firstZeroIndex] = prod;
+                return result;
+            }
 
             for (var i = 0; i < n; i++)
             {
