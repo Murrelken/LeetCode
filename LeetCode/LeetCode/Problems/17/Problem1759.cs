@@ -1,5 +1,3 @@
-using System.Linq;
-
 public class Problem1759
 {
     public int CountHomogenous(string s)
