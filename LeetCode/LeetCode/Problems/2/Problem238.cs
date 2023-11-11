@@ -93,5 +93,50 @@ namespace LeetCode.Problems
 
             return result;
         }
+
+        public int[] ProductExceptSelfV3(int[] nums)
+        {
+            var n = nums.Length;
+            var prod = 1;
+            var zeroMet = false;
+            var firstZeroIndex = -1;
+
+            for (var i = 0; i < n; i++)
+            {
+                if (nums[i] == 0)
+                    if (zeroMet)
+                    {
+                        prod = 0;
+                        break;
+                    }
+                    else
+                    {
+                        zeroMet = true;
+                        firstZeroIndex = i;
+                    }
+                else
+                    prod *= nums[i];
+            }
+
+            if (prod == 0)
+            {
+                Array.Fill(nums, 0);
+                return nums;
+            }
+
+            if (zeroMet)
+            {
+                Array.Fill(nums, 0);
+                nums[firstZeroIndex] = prod;
+                return nums;
+            }
+
+            for (var i = 0; i < n; i++)
+            {
+                nums[i] = prod / nums[i];
+            }
+
+            return nums;
+        }
     }
 }
