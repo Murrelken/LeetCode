@@ -24,7 +24,7 @@ namespace LeetCode.Problems._27
 				res[i] = totalVowels.Contains(s[i]) ? vowels[vowelsI++] : s[i];
 			}
 
-			return res.ToString();
+			return new string(res);
 		}
 	}
 }
