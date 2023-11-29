@@ -9,7 +9,6 @@ namespace LeetCode.Problems._9
 
 		public int KnightDialer(int n)
 		{
-			//var availableMoves = new int[] { 2, 2, 2, 3, 0, 3, 2, 2, 2, 2 };
 			var availableMoves = new[] { new[] { 4, 6 }, new [] { 6, 8 }, new[] { 7, 9 }, new[] { 4, 8 }, new[] { 3, 9, 0 } , Array.Empty<int>(),
 				new[] { 1, 7, 0 }, new[] { 2, 6 }, new[] { 1, 3 }, new[] { 2, 4 } };
 			var memo = new Dictionary<int, Dictionary<int, int>>();
