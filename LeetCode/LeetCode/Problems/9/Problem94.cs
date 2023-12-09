@@ -8,7 +8,8 @@ namespace LeetCode.Problems._9
 		public IList<int> InorderTraversal(TreeNode root)
 		{
 			var res = new List<int>();
-			RecursiveTraversal(root, res);
+			if (root != null) 
+				RecursiveTraversal(root, res);
 			return res;
 		}
 
