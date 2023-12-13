@@ -11,7 +11,7 @@ namespace LeetCode.Problems._15
 			var n = mat[0].Length;
 			var columnsWhereOnesExist = new HashSet<int>();
 			var columnsWhereOnesExistMoreThanOnce = new HashSet<int>();
-			var rowsWithOnlyOneOne = new List<(int i, int j)>();
+			var positionOfOneInRowsToCheck = new List<(int i, int j)>();
 
 			for (var i = 0; i < m; i++)
 			{
@@ -30,10 +30,10 @@ namespace LeetCode.Problems._15
 					}
 				}
 				if (found == 1)
-					rowsWithOnlyOneOne.Add((i, tempJ));
+					positionOfOneInRowsToCheck.Add((i, tempJ));
 			}
 
-			return rowsWithOnlyOneOne.Count(x => !columnsWhereOnesExistMoreThanOnce.Contains(x.j));
+			return positionOfOneInRowsToCheck.Count(x => !columnsWhereOnesExistMoreThanOnce.Contains(x.j));
 		}
 	}
 }
