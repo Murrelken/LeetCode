@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using System.Linq;
 
-namespace LeetCode.Problems;
+namespace LeetCode.Problems._24;
 
 public class Problem2448
 {//1907611126748

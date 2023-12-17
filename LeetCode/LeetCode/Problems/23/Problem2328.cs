@@ -1,6 +1,4 @@
-using System.Linq;
-
-namespace LeetCode.Problems;
+namespace LeetCode.Problems._23;
 
 public class Problem2328
 {
