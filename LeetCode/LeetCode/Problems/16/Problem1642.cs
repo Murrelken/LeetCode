@@ -54,7 +54,10 @@ namespace LeetCode.Problems
 				if (ladders > 0)
 				{
 					ladders--;
-					heightsCoveredWithLadders.Add(h, h);
+					if (heightsCoveredWithLadders.ContainsKey(h))
+						heightsCoveredWithLadders[h]++;
+					else
+						heightsCoveredWithLadders.Add(h, 1);
 				}
 				else
 				{
@@ -68,8 +71,15 @@ namespace LeetCode.Problems
 						bricks -= min;
 						if (coveringForLadder)
 						{
-							heightsCoveredWithLadders.Remove(min);
-							heightsCoveredWithLadders.Add(h, h);
+							if (heightsCoveredWithLadders[min] == 1)
+								heightsCoveredWithLadders.Remove(min);
+							else
+								heightsCoveredWithLadders[min]--;
+
+							if (heightsCoveredWithLadders.ContainsKey(h))
+								heightsCoveredWithLadders[h]++;
+							else
+								heightsCoveredWithLadders.Add(h, 1);
 						}
 					}
 					else return i - 1;
