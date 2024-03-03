@@ -1,3 +1,4 @@
+using LeetCode.DataStructures;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,6 +31,24 @@ namespace LeetCode.OtherActivities.AlgorithmStudyPlan.Algorithm1
             }
             
             return newArr;
-        }
-    }
+		}
+
+		public ListNode RemoveNthFromEndV2(ListNode head, int n)
+		{
+			var preHead = new ListNode(0, head);
+			var preRemoved = preHead;
+			while (n > 0)
+			{
+				n--;
+				head = head.next;
+			}
+			while (head != null)
+			{
+				head = head.next;
+				preRemoved = preRemoved.next;
+			}
+			preRemoved.next = preRemoved.next.next;
+			return preHead.next;
+		}
+	}
 }
