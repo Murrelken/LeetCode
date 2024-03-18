@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using LeetCode.DataStructures;
 using LeetCode.Problems;
+using LeetCode.Problems._4;
 
 namespace LeetCode
 {
@@ -10,27 +11,26 @@ namespace LeetCode
     {
         static void Main(string[] args)
         {
-            var input =
-                new TreeNode(1,
-                    right: new TreeNode(2,
-                        right: new TreeNode(3,
-                            right: new TreeNode(4,
-                                right: new TreeNode(5,
-                                    right: new TreeNode(6,
-                                        right: new TreeNode(7,
-                                            right: new TreeNode(8,
-                                                right: new TreeNode(9,
-                                                    right: new TreeNode(10
-                                                    ))))))))));
+            var inputStr = "[10,16],[2,8],[1,6],[7,12]";
 
-            var copy = input;
-            copy.right.right.right.right = new TreeNode(5, right: copy.right.right.right.right.right);
+			var p = new Problem452();
+            var input = GetInput<int>(inputStr, Int32.Parse);
+            var res = p.FindMinArrowShots(input);
 
-            var p = new Problem1379();
+            Console.WriteLine(res);
+        }
 
-            var res = p.GetTargetCopy(input, copy, input.right.right.right.right);
-
-            Console.WriteLine(res.val);
+        private static T[][] GetInput<T> (string inputStr, Func<string, T> conv)
+        {
+            var res = new List<T[]>();
+            var a = inputStr.Split('[').Skip(1);
+            foreach (var t in a)
+            {
+                var withComma = t.Split(']')[0];
+                var values = withComma.Split(",").Select(conv).ToArray();
+                res.Add(values);
+            }
+            return res.ToArray();
         }
     }
 }
