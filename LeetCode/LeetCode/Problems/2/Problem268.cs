@@ -1,18 +1,14 @@
-using System.Collections.Generic;
+using System.Linq;
 
 namespace LeetCode.Problems
 {
-    public class Problem268
-    {
-        public int MissingNumber(int[] nums)
-        {
-            var hash = new HashSet<int>(nums);
-
-            for (int i = 0; i <= nums.Length; i++)
-                if (!hash.Contains(i))
-                    return i;
-
-            return -1;
-        }
-    }
+	public class Problem268
+	{
+		public int MissingNumber(int[] nums)
+		{
+			var n = nums.Length;
+			var total = (int)(((double)(1 + n)) / 2 * n);
+			return total - nums.Sum();
+		}
+	}
 }
