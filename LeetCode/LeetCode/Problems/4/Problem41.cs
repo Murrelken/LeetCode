@@ -10,12 +10,10 @@ namespace LeetCode.Problems._4
 			var contains1 = false;
 
 			for (var i = 0; i < n; i++)
-			{
 				if (nums[i] == 1)
 					contains1 = true;
-				if (nums[i] <= 0 || nums[i] > n)
+				else if (nums[i] <= 0 || nums[i] > n)
 					nums[i] = 1;
-			}
 
 			if (!contains1) return 1;
 
