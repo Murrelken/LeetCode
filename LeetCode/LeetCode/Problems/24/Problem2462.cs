@@ -1,6 +1,6 @@
 using System.Collections.Generic;
 
-namespace LeetCode.Problems;
+namespace LeetCode.Problems._24;
 
 public class Problem2462
 {
