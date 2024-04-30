@@ -4,7 +4,7 @@
 	{
 		public long WonderfulSubstrings(string word)
 		{
-			var result = 0;
+			var result = 0L;
 			var count = new int[1024];
 			count[0] = 1;
 			var mask = 0;
