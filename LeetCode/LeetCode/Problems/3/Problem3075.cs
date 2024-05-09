@@ -10,7 +10,7 @@ namespace LeetCode.Problems._3
 			Array.Reverse(happiness);
 
 			var rounds = 0;
-			var totalHappySum = 0;
+			var totalHappySum = 0L;
 
 			for (var i = 0; i < k && i < happiness.Length; i++)
 			{
